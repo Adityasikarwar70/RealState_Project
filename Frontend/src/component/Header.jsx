@@ -17,7 +17,7 @@ const Header = () => {
   ];
   return (
     
-      <div className="flex justify-between items-center   gap-[10vw] p-4  w-full bg-slate-200 md:bg-transparent md:shadow-none shadow-md  md:items-center md:justify-center ">
+      <div className=" absolute flex justify-between items-center   gap-[10vw] p-4  w-full bg-slate-200 md:bg-transparent md:shadow-none shadow-md  md:items-center md:justify-center ">
         <h1 className="text-2xl font-semibold">
           <span>Aditya</span>
           <span className="text-gray-800 font-bold">Estate</span>
