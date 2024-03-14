@@ -7,7 +7,7 @@ mongoose.connect(process.env.MONGODB_URL).then(()=>{
     console.log("MongoDB database is connected");
 })
 .catch((err)=>{
-console.log("Something went wrong with DATABASE" , err);
+console.log("Something went wrong with DATABASE " , err);
 })
 
 
