@@ -32,7 +32,7 @@ const Header = () => {
               </a>
             );
           })}
-          <Link to="/sign-in">
+          <Link to="/signin">
             <button className="px-3 py-1 bg-red-400 rounded-md">Sign In</button>
           </Link>
         </div>
