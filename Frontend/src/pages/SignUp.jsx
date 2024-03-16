@@ -1,5 +1,5 @@
 import signup from "/assets/signup.jpg";
-import { Link , Navigate, useNavigate } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import { IoIosLogIn } from "react-icons/io";
 import { useState  } from "react";
 export const SignUp = () => {
