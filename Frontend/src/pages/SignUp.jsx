@@ -105,7 +105,7 @@ export const SignUp = () => {
                   <h1 className=" text-red-600 hover:text-red-700  ">Login</h1>
                 </Link>
               </p>
-              <p className=" text-[12px] font-mono font-semibold flex flex-row gap-2">
+              <p className=" text-[12px] text-red-600 font-mono font-semibold flex flex-row gap-2">
               {error && <p>{error}</p>}
               </p>
               
