@@ -2,11 +2,14 @@ import login from "/assets/login.jpg";
 import { Link , useNavigate } from "react-router-dom";
 import { IoIosLogIn } from "react-icons/io";
 import { useState  } from "react";
+import {useDispatch, useSelector} from 'react-redux'
+import {signInFailure ,signInStart ,signInSuccess} from '../redux/user/userSlice.js'
+
 export const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const [error, seterror] = useState(null)
-  const [loading, setloading] = useState(false)
+const {loading, error} = useSelector((state)=>state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({
@@ -17,7 +20,7 @@ export const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setloading(true);
+      dispatch(signInStart());
       const res = await fetch('/api/auth/signin', {
         method: "POST",
         headers: {
@@ -28,18 +31,15 @@ export const SignIn = () => {
       });
       const data = await res.json();
       if(data.success ===false){
-        seterror(data.message);
-        setloading(false);
+        dispatch(signInFailure(data.message));
         return;
       }
-      setloading(false);
-      seterror(false)
+      dispatch(signInSuccess(data));
       navigate('/')
       
       
     } catch (error) {
-      setloading(false)
-      seterror(error.message)
+      dispatch(signInFailure(error.message));
     }
   };
   

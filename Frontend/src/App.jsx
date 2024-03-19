@@ -7,6 +7,7 @@ import About from './pages/About'
 import Profile from './pages/Profile'
 import  Header  from './component/Header'
 
+
 function App() {
   
   return (
