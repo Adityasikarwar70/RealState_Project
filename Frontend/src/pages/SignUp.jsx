@@ -2,6 +2,7 @@ import signup from "/assets/signup.jpg";
 import { Link , useNavigate } from "react-router-dom";
 import { IoIosLogIn } from "react-icons/io";
 import { useState  } from "react";
+import OAuth from "../component/OAuth";
 export const SignUp = () => {
   const [formData, setFormData] = useState({});
   const [error, seterror] = useState(null)
@@ -94,11 +95,12 @@ export const SignUp = () => {
               />
               <button
               disabled={loading}
-                className="w-[25vw] md:w-[10vw] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex  items-center gap-2 "
+                className="w-[25vw] md:w-[10vw] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex  items-center justify-center gap-2 "
                 type="submit"
               >
                 {loading ? 'Loading...':'Sign Up'} <IoIosLogIn className=" text-xl font-extrabold" />
               </button>
+              <OAuth/>
               <p className=" text-[12px] font-mono font-semibold flex flex-row gap-2">
                 Already have an Account ?
                 <Link to={"/signin"}>

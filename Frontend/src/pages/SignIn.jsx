@@ -4,6 +4,7 @@ import { IoIosLogIn } from "react-icons/io";
 import { useState  } from "react";
 import {useDispatch, useSelector} from 'react-redux'
 import {signInFailure ,signInStart ,signInSuccess} from '../redux/user/userSlice.js'
+import OAuth from "../component/OAuth.jsx";
 
 export const SignIn = () => {
   const [formData, setFormData] = useState({});
@@ -82,11 +83,12 @@ const {loading, error} = useSelector((state)=>state.user);
               />
               <button
               disabled={loading}
-                className="w-[25vw] md:w-[10vw] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex  items-center gap-2 "
+                className="w-[25vw] md:w-[10vw] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex  items-center justify-center   gap-2 "
                 type="submit"
               >
                 {loading ? 'Loading...':'Sign In'} <IoIosLogIn className=" text-xl font-extrabold" />
               </button>
+              <OAuth/>
               <p className=" text-[12px] font-mono font-semibold flex flex-row gap-2">
                 Do not have an Account ?
                 <Link to={"/signup"}>
