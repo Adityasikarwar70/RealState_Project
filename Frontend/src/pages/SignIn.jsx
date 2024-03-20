@@ -47,8 +47,8 @@ const {loading, error} = useSelector((state)=>state.user);
 
   return (
     <>
-      <div className="h-screen w-screen flex flex-col  items-center justify-center">
-        <h1 className=" relative top-[20vh] md:top-[15vh] text-4xl font-bold text-white md:text-red-700">
+      <div className="h-screen w-screen flex flex-col  items-center justify-center ">
+        <h1 className=" relative top-[20vh] md:top-[15vh] text-4xl font-bold text-white md:text-red-700 ">
           SignIn
         </h1>
         <div className="w-[80vw] md:w-[50vw] h-screen  flex flex-col md:flex-row items-center justify-center rounded-lg overflow-hidden ">
