@@ -20,9 +20,9 @@ const Header = () => {
   ];
   return (
     
-     <div>
-      <div className=" absolute flex flex-row justify-between items-center px-20 py-5 text-white ">
-        <h1 className="text-xl font-semibold">
+     
+      <div className="absolute py-5 px-[10vw] gap-[20vw] flex flex-row items-center justify-between text-white ">
+        <h1 className="text-xl font-semibold flex items-center">
           <span>Aditya</span>
           <span className="text-gray-800 font-bold">Estate</span>
         </h1>
@@ -36,7 +36,7 @@ const Header = () => {
               </a>
             );
           })}
-              <Link to="/signin">
+              <Link to="/profile">
             {currentUser? (
             
               <img src={currentUser.image} className=" w-10 rounded-full object-cover border-2 border-black" alt="" />
@@ -65,7 +65,7 @@ const Header = () => {
           </button>
         </Link>
       </div>
-      </div>
+      
     
   );
 };
