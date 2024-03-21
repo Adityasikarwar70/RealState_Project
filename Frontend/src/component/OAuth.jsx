@@ -21,8 +21,10 @@ const OAuth = () => {
                 headers: {
                   'Content-Type': 'application/json',
                 },
+                
                 body:JSON.stringify({name:result.user.displayName, email:result.user.email, Image:result.user.photoURL})
             })
+           
             const data = await res.json();
             dispatch(signInSuccess(data));
             navigate('/');
@@ -35,8 +37,8 @@ const OAuth = () => {
 
 
   return (
-    <button onClick={handleGoogle} type="button" className=" w-[25vw] md:w-[10vw] bg-zinc-300 hover:bg-zinc-200 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex  items-center justify-center gap-2">
-       Continue <FcGoogle className=" text-lg"/> 
+    <button onClick={handleGoogle} type="button" className=" w-3/4  bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline flex  items-center justify-center   gap-2">
+       Continue with <FcGoogle className=" text-lg"/> 
     </button>
   )
 }

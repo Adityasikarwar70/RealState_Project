@@ -21,16 +21,16 @@ const Header = () => {
   return (
     
      
-      <div className="absolute py-5 px-[10vw] gap-[20vw] flex flex-row items-center justify-between text-white ">
+      <div className="absolute w-screen h-20 p-5 flex flex-row items-center justify-around  text-white ">
         <h1 className="text-xl font-semibold flex items-center">
           <span>Aditya</span>
           <span className="text-gray-800 font-bold">Estate</span>
         </h1>
         {/* nav items */}
-        <div className="hidden md:flex   items-center  gap-10 text-sm  ">
+        <div className=" md:flex   items-center  gap-10 text-sm  ">
           {navItems.map((items, index) => {
             return (
-              <a className=" capitalize hover:text-zinc-300 font-semibold " key={index} href={items.link}>
+              <a className="hidden md:flex capitalize hover:text-zinc-300 font-semibold " key={index} href={items.link}>
                 {" "}
                 {items.name}
               </a>
@@ -39,31 +39,32 @@ const Header = () => {
               <Link to="/profile">
             {currentUser? (
             
-              <img src={currentUser.image} className=" w-10 rounded-full object-cover border-2 border-black" alt="" />
+              <img src={currentUser.image} className=" sm:flex w-10 rounded-full object-cover border-2 border-black" alt="" />
        
             ):(
               
-              <button className="px-3 py-2 bg-red-400 rounded-md">Sign In</button>
+              <button className=" px-3 py-2 bg-red-400 text-sm rounded-md">Sign In</button>
             )}
           </Link>
         </div>
 
         <form
           action=""
-          className="flex items-center bg-white px-2 rounded-md text-black md:bg-slate-200"
+          className="flex items-center bg-[#00544f] px-2 rounded-md text-black md:bg-[#00544f] drop-shadow-lg"
         >
           <input
-            className=" w-[25vw] md:w-[13vw]  p-2 rounded-md text-black md:bg-slate-200 border-none border-0  "
+            className=" p-2 bg-[#00544f] focus:outline-none text-white "
             type="text"
             placeholder="Search Here"
           />
           <CiSearch />
         </form>
-        <Link to="/sign-in" className="md:hidden">
+    
+        {/* <Link to="/signin" className="md:hidden">
           <button className="  px-3 py-2 bg-red-400 rounded-md">
             Sign In
           </button>
-        </Link>
+        </Link> */}
       </div>
       
     

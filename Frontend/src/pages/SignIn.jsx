@@ -1,10 +1,11 @@
-import login from "/assets/login.jpg";
+
 import { Link , useNavigate } from "react-router-dom";
 import { IoIosLogIn } from "react-icons/io";
 import { useState  } from "react";
 import {useDispatch, useSelector} from 'react-redux'
 import {signInFailure ,signInStart ,signInSuccess} from '../redux/user/userSlice.js'
 import OAuth from "../component/OAuth.jsx";
+import { GiHangingSign } from "react-icons/gi";
 
 export const SignIn = () => {
   const [formData, setFormData] = useState({});
@@ -47,27 +48,21 @@ const {loading, error} = useSelector((state)=>state.user);
 
   return (
     <>
-      <div className="h-screen w-screen flex flex-col  items-center justify-center ">
-        <h1 className=" relative top-[20vh] md:top-[15vh] text-4xl font-bold text-white md:text-red-700 ">
-          SignIn
-        </h1>
-        <div className="w-[80vw] md:w-[50vw] h-screen  flex flex-col md:flex-row items-center justify-center rounded-lg overflow-hidden ">
-          <div className="w-full h-1/4 md:h-[55vh]  rounded-t-lg md:rounded-t-none md:rounded-l-lg ">
-            <img
-              className="abslute object-cover md:h-full md:rounded-l-lg  "
-              src={login}
-              alt=""
-            />
+      
+
+      <section className="w-screen h-screen flex items-center justify-center p-20 drop-shadow-lg">
+        <div className=" h-[500px] w-[350px] bg-[#00544f] rounded-xl">
+          <div className="w-full h-28  flex items-center justify-center">
+          <GiHangingSign className="text-6xl text-white " />
           </div>
-          <div className="w-full h-[50vh] md:h-[55vh] bg-white  rounded-b-lg md:rounded-r-xl md:rounded-b-none   ">
-            <form
+          <form
               onSubmit={handleSubmit}
               action=""
-              className=" flex flex-col gap-3 px-8 py-5 justify-center"
+              className=" flex flex-col gap-3 px-8  justify-center"
             >
               <label className="mt-5 text-[10px] font-mono font-bold"> Email</label>
               <input
-                className="p-2 rounded-sm"
+                className="p-2 bg-[#00544f] border-b-[1px] focus:outline-none  "
                 type="email"
                 placeholder="Email"
                 id="email"
@@ -75,34 +70,38 @@ const {loading, error} = useSelector((state)=>state.user);
               />
               <label className="mt-5 text-[10px] font-mono font-bold"> Password</label>
               <input
-                className="p-2 rounded-sm"
+                className="p-2 bg-[#00544f] border-b-[1px] focus:outline-none"
                 type="password"
                 placeholder="password"
                 id="password"
                 onChange={handleChange}
               />
+              <div className="w-full p-4 flex flex-col gap-2 items-center justify-center">
               <button
               disabled={loading}
-                className="w-[25vw] md:w-[10vw] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex  items-center justify-center   gap-2 "
+                className="w-3/4  bg-white hover:opacity-90 text-[#00544f] font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline flex  items-center justify-center   gap-2 "
                 type="submit"
               >
                 {loading ? 'Loading...':'Sign In'} <IoIosLogIn className=" text-xl font-extrabold" />
               </button>
-              <OAuth/>
-              <p className=" text-[12px] font-mono font-semibold flex flex-row gap-2">
+              <OAuth />
+              </div>
+            </form>
+              <div className="w-full border-t-[1px] border-white border-opacity-40 flex flex-col items-center justify-center p-3">
+              <p className=" text-[13px]  font-mono font-semibold flex flex-row gap-2">
                 Do not have an Account ?
                 <Link to={"/signup"}>
-                  <h1 className=" text-red-600 hover:text-red-700  ">SignUp</h1>
+                  <h1 className=" text-white hover:text-red-700  ">SignUp</h1>
                 </Link>
               </p>
-              <p className=" text-[12px] text-red-600 font-mono font-semibold flex flex-row gap-2">
-              {error && <p>{error}</p>}
+              <p className=" text-[12px]  text-white font-mono font-semibold flex flex-row gap-2">
+              {error && <p className="border-b-2 border-red-900">{error}</p>}
               </p>
-              
-            </form>
-          </div>
+              </div>
+
         </div>
-      </div>
+
+      </section>
     </>
   );
 };

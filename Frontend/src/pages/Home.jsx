@@ -1,8 +1,9 @@
-
+// import { useSelector } from "react-redux";
 function Home() {
+  // const { currentUser } = useSelector((state) => state.user);
   return (
     <div>
-      this is Home
+      {/* <img src={currentUser.image} alt="" /> */}
     </div>
   )
 }
