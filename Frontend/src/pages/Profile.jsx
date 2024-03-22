@@ -36,7 +36,7 @@ function Profile() {
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
-      'state_changed',
+      "state_changed",
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -86,15 +86,30 @@ function Profile() {
             accept="image/*"
           />
           <div className=" flex flex-col items-center gap-6">
-          <img
-            onClick={() => imgRef.current.click()}
-            src={formData.image || currentUser.image }
-            alt="pfp"
-            className="cursor-pointer rounded-full h-56 w-56 md:h-[200px] md:w-[200px]  hover:opacity-85"
-          />
-          
-          <p className="text-lg font-semibold">{fileUploadError?( <span className=" text-red-500">Error found : Image upload error</span>): filePercentage>0 && filePercentage<100 ?(<span className=" text-green-600">{`Uploading ${filePercentage}%`}</span>): filePercentage==100?(
-             <span className=" text-green-500"> Image Successfully Uploaded !</span>):("" ) }</p></div>
+            <img
+              onClick={() => imgRef.current.click()}
+              src={formData.image || currentUser.image}
+              alt="pfp"
+              className="cursor-pointer rounded-full h-56 w-56 md:h-[200px] md:w-[200px]  hover:opacity-85"
+            />
+
+            <p className="text-lg font-semibold">
+              {fileUploadError ? (
+                <span className=" text-red-500">
+                  Error found : Image upload error
+                </span>
+              ) : filePercentage > 0 && filePercentage < 100 ? (
+                <span className=" text-green-600">{`Uploading ${filePercentage}%`}</span>
+              ) : filePercentage == 100 ? (
+                <span className=" text-green-500">
+                  {" "}
+                  Image Successfully Uploaded !
+                </span>
+              ) : (
+                ""
+              )}
+            </p>
+          </div>
         </div>
       </div>
       <div className="md:h-full h-1/3 mt-20 py-20 flex flex-col items-center justify-center">
