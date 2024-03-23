@@ -1,17 +1,15 @@
+import jwt from 'jsonwebtoken';
+import { errorHandler } from './error.js';
 
-import { errorHandler } from "./error.js";
-import  Jwt  from "jsonwebtoken";
+export const verifyToken = (req, res, next) => {
+  const token = req.cookies.access_token;
 
-export const verifyToken =(req,res,next)=>{
-    const token = req.cookies.access_token;
+  if (!token) return next(errorHandler(401, 'Unauthorized'));
 
-    if(!token) return next(errorHandler(401,"unAuthorized"))
+  jwt.verify(token, process.env.JWT_KEY, (err, user) => {
+    if (err) return next(errorHandler(403, 'Forbidden'));
 
-    Jwt.verify(token, process.env.JWT_KEY,(err,user)=>{
-        if(err) return next(errorHandler(403,'forbidden'));
-
-        req.user=user;
-        next();
-    })
-
-}
+    req.user = user;
+    next();
+  });
+};

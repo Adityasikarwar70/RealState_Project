@@ -27,7 +27,7 @@ const Header = () => {
           <span className="text-gray-800 font-bold">Estate</span>
         </h1>
         {/* nav items */}
-        <div className=" md:flex   items-center  gap-10 text-sm  ">
+        <div className=" md:flex   items-center   gap-10 text-sm  ">
           {navItems.map((items, index) => {
             return (
               <a className="hidden md:flex capitalize hover:text-zinc-300 font-semibold " key={index} href={items.link}>
@@ -38,9 +38,9 @@ const Header = () => {
           })}
               <Link to="/profile">
             {currentUser? (
-            
-              <img src={currentUser.image} className=" sm:flex w-10 rounded-full object-cover border-2 border-black" alt="" />
-       
+            <div className="w-[40px] h-[40px] ">
+              <img src={currentUser.image} className=" sm:flex w-full h-full rounded-full object-cover border-2 border-white" alt="" />
+              </div>
             ):(
               
               <button className=" px-3 py-2 bg-red-400 text-sm rounded-md">Sign In</button>
