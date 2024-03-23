@@ -13,10 +13,6 @@ const Header = () => {
       name: "about",
       link: "/about",
     },
-    // {
-    //   name: "profile",
-    //   link: "/profile",
-    // },
   ];
   return (
     

@@ -191,7 +191,7 @@ try {
       {isShown && (
         <div
           id="Update"
-          className=" absolute z-20 w-[350px] h-[550px] top-32 md:left-96 p-10 bg-[#00544f] shadow-xl"
+          className=" absolute z-20 w-[350px] h-[550px] top-30 md:left-96 p-10 bg-[#00544f] shadow-xl"
         >
           <form  onSubmit={handleSubmit} className="flex flex-col gap-3 py-3  ">
             <div
@@ -265,10 +265,12 @@ try {
               onChange={handleChange}
             />
              {/* onClick={()=>window.location.reload()} */}
-            <button className=" bg-slate-800 text-white rounded-lg p-3  uppercase hover:opacity-90 disabled:opacity-80">
+            <button  onClick={logoutUser} className=" bg-slate-800 text-white rounded-lg p-3  uppercase hover:opacity-90 disabled:opacity-80">
               Save Update
             </button>
+            <p className="text-[10px]  font-semibold text-white text-center">After Updation you will be logged out automatically</p>
           </form>
+          
           <p onClick={handleDelete} className=" font-semibold text-rose-500 underline cursor-pointer w-[114px] hover:text-red-800 ">Delete Account </p>
         </div>
       )}
