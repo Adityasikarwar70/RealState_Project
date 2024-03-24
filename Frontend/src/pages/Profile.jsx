@@ -9,6 +9,7 @@ import {
 import { app } from "../firebase";
 import { ImCross } from "react-icons/im";
 import { deleteUserFailure, deleteUserStart, deleteUserSuccess, logoutUserFailure, logoutUserStart, logoutUserSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from "../redux/user/userSlice";
+import { Link } from "react-router-dom";
 
 
 function Profile() {
@@ -160,10 +161,10 @@ try {
       </div>
       <div className="md:h-full h-1/3 mt-20 py-20 flex flex-col items-center justify-center">
         <div className=" h-full w-full px-10 flex flex-col items-center md:items-start  md:gap-4">
-          <input disabled className="  text-2xl md:text-5xl font-bold focus:outline-none bg-transparent " placeholder="HELLO"/>
+          <h1 disabled className="  text-2xl md:text-5xl my-2 text-white ">HELLO</h1>
            
           
-          <input disabled className=" text-white w-2/3 text-4xl md:text-7xl capitalize font-semibold mb-4 focus:outline-none bg-transparent " defaultValue={currentUser.username}/>
+          <input disabled className=" text-white text-center md:text-left w-2/3 text-4xl md:text-7xl capitalize font-semibold mb-4 focus:outline-none bg-transparent " defaultValue={currentUser.username}/>
            
         </div>
         <div className="h-full w-full px-10 flex flex-col items-center md:items-start gap-2 md:gap-4 ">
@@ -186,6 +187,8 @@ try {
               LogOut
             </button>
           </div>
+            <Link className=" md:hidden mt-3 md:w-1/3 w-[250px] md:h-1/3 h-full  bg-blue-500 hover:opacity-90 text-[#ffffff] font-bold py-2 px-4 rounded-full 
+        focus:outline-none focus:shadow-outline flex  items-center justify-center" to="/createListing">Create Listing</Link>
         </div>
       </div>
       {isShown && (

@@ -23,7 +23,7 @@ const Header = () => {
           <span className="text-gray-800 font-bold">Estate</span>
         </h1>
         {/* nav items */}
-        <div className=" md:flex   items-center   gap-10 text-sm  ">
+        <div className=" md:w-[400px] md:flex   items-center justify-center   gap-10 text-sm  ">
           {navItems.map((items, index) => {
             return (
               <a className="hidden md:flex capitalize hover:text-zinc-300 font-semibold " key={index} href={items.link}>
@@ -42,6 +42,8 @@ const Header = () => {
               <button className=" px-3 py-2 bg-red-400 text-sm rounded-md">Sign In</button>
             )}
           </Link>
+          
+        <Link className=" hidden md:block md:w-[120px]  bg-blue-500 hover:opacity-70 text-[#ffffff] font-bold py-2 text-center rounded-lg" to="/createListing">Create Listing</Link>
         </div>
 
         <form
