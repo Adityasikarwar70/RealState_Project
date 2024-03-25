@@ -1,131 +1,79 @@
+import { useState } from "react";
+import {getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/storage'
+import { app } from '../firebase';
+import { MdDeleteForever } from "react-icons/md";
+ 
+
 const CreateListing = () => {
+
+ const [files, setFiles] = useState([]);
+ const [formData, setFormData] = useState({
+  imageUrls:[],
+ })
+//  console.log(files);
+// console.log(formData);
+const [imageUploadError, setimageUploadError] = useState(false)
+const [loading, setLoading] = useState(false)
+
+ const handleSubmit =(e)=>{
+  if(files.length >0 && files.length + formData.imageUrls.length < 7){
+    setLoading(true);
+    setimageUploadError(false)
+    const promises = []; 
+
+    for (let i = 0; i < files.length; i++) {
+     promises.push(storeImage(files[i]));
+      
+    }
+    Promise.all(promises).then((urls)=>{
+      setFormData({...formData,imageUrls:formData.imageUrls.concat(urls)});
+
+      setimageUploadError(false);
+      setLoading(false)
+    }).catch((err)=>{
+      setimageUploadError('Image Upload error')
+      setLoading(false)
+    })
+  }else{
+    setimageUploadError('you can only upload 6 images')
+    setLoading(false)
+  }
+ }
+ const storeImage =async(file)=>{
+  return new Promise ((resolve,reject)=>{
+    const storage = getStorage(app);
+    const fileName = new Date().getTime()+file.name;
+    const storageRef = ref(storage,fileName);
+    const uploadTask = uploadBytesResumable(storageRef,file);
+    uploadTask.on(
+      'state_changed',
+      (snapshot)=>{
+        const progress = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+        console.log(`${progress}`);
+      },
+      (error)=>{
+        reject(error);
+      },
+      ()=>{
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+          resolve(downloadURL)
+        })
+      }
+    )
+  });
+ }
+
+ const handleDeleteImage = (index) => {
+  setFormData({
+    ...formData,
+    imageUrls: formData.imageUrls.filter((_, i) => i !== index),
+  });
+};
+
+
+
   return (
-    //     <main className=" h-full w-full py-10 flex flex-col flex-wrap ">
-    //       <h1 className=" text-center pt-20 md:pt-10 pb-5  text-4xl font-bold text-white border-b-2 border-opacity-30 border-gray-500">
-    //         Create a listing
-    //       </h1>
-    //       <div className=" h-full w-full  flex md:flex-row flex-col items-center justify-between">
-    //         <form
-    //           action=""
-    //           className="w-[400px] md:[1/2] h-[520px] flex flex-col gap-10 md:flex-row  items-center  text-white text-lg md:px-16"
-    //         >
-    //         <div className="">
-    // <div className="w-full  flex flex-col gap-5 p-10 ">
-    //   <input
-    //     type="text"
-    //     placeholder="Name"
-    //     id="name"
-    //     className="p-2 bg-transparent border-b-[1px] focus:outline-none"
-    //     required
-    //   />
-    //   <textarea
-    //     type="text"
-    //     placeholder="Discription"
-    //     id="discription"
-    //     className="p-2 bg-transparent border-b-[1px] focus:outline-none"
-    //     required
-    //   />
-    //   <input
-    //     type="text"
-    //     placeholder="Address"
-    //     id="address"
-    //     className="p-2 bg-transparent border-b-[1px] focus:outline-none"
-    //     required
-    //   />
-    // </div>
-    // <div className=" px-10 gap-3 items-center flex flex-wrap">
-    //   <div className="flex items-center">
-    //     <input
-    //       type="checkbox"
-    //       className="w-5 h-5 bg-red-600 rounded  dark:ring-offset-gray-800 "
-    //     />
-    //     <label className="ms-2 text-sm font-medium text-white">
-    //       Sell
-    //     </label>
-    //   </div>
-    //   <div className="flex items-center me-4">
-    //     <input
-    //       type="checkbox"
-    //       className="w-5 h-5 bg-red-600 rounded  dark:ring-offset-gray-800 "
-    //     />
-    //     <label className="ms-2 text-sm font-medium text-white">
-    //       Rent
-    //     </label>
-    //   </div>
-    //   <div className="flex items-center me-4">
-    //     <input
-    //       type="checkbox"
-    //       className="w-5 h-5 bg-red-600 rounded  dark:ring-offset-gray-800 "
-    //     />
-    //     <label className="ms-2 text-sm font-medium text-white">
-    //       Parking spot
-    //     </label>
-    //   </div>
-    //   <div className="flex items-center me-4">
-    //     <input
-    //       type="checkbox"
-    //       className="w-5 h-5 bg-red-600 rounded  dark:ring-offset-gray-800 "
-    //     />
-    //     <label className="ms-2 text-sm font-medium text-white">
-    //       Furnished
-    //     </label>
-    //   </div>
-    //   <div className="flex items-center me-4">
-    //     <input
-    //       type="checkbox"
-    //       className="w-5 h-5 bg-red-600 rounded  dark:ring-offset-gray-800 "
-    //     />
-    //     <label className="ms-2 text-sm font-medium text-white">
-    //       Offer
-    //     </label>
-    //   </div>
-    // </div>
-    // <div className=" w-full  p- flex  flex-wrap items-center justify-start  gap-3 px-6 ">
-    //   <div className="flex items-center gap-5">
-    //     <input
-    //       type="number"
-    //       className="w-[100px] h-10   bg-transparent border-b-[1px] focus:outline-none   "
-    //     />
-    //     <label className="ms-2 text-sm font-medium text-white ">
-    //       BedRooms
-    //     </label>
-    //   </div>
-    //   <div className="flex items-center me-4">
-    //     <input
-    //       type="number"
-    //       className="w-[100px] h-10  bg-transparent border-b-[1px] focus:outline-none  dark:ring-offset-gray-800 "
-    //     />
-    //     <label className="ms-2 text-sm font-medium text-white">
-    //       BathRooms
-    //     </label>
-    //   </div>
-    //   <div className="flex items-center me-4">
-    //     <input
-    //       type="number"
-    //       className="w-[100px] h-10 bg-transparent border-b-[1px] focus:outline-none dark:ring-offset-gray-800 "
-    //     />
-    //     <label className="ms-2 text-sm font-medium text-white flex flex-col">
-    //       Regular Price <span>(Rs: /Month)</span>
-    //     </label>
-    //   </div>
-    //   <div className="flex items-center me-4">
-    //     <input
-    //       type="number"
-    //       className="w-[100px] h-10 bg-transparent border-b-[1px] focus:outline-none dark:ring-offset-gray-800 "
-    //     />
-    //     <label className="ms-2 text-sm font-medium text-white flex flex-col">
-    //       Discounted Prise
-    //       <span>(Rs: /Month)</span>
-    //     </label>
-    //   </div>
-    // </div>
-    // </div>
-    //           <div className="w-full h-full flex flex-col gap-5 p-10 ">
-    // vdsdvava
-    //           </div>
-    //         </form>
-    //       </div>
-    //     </main>
+   
 
     <section className="h-screen w-full py-10 ">
       <h1 className=" text-center pt-10  pb-5  text-4xl font-bold text-white border-b-2 border-opacity-30 border-gray-500">
@@ -261,7 +209,7 @@ const CreateListing = () => {
                 </span>
               </h1>
               <div>
-                <div className=" w-[350px] flex items-center flex-col justify-center gap-4">
+                <div className=" w-[350px] h-full flex items-center flex-col justify-center gap-4">
                   <label
                     htmlFor="image"
                     className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -291,6 +239,7 @@ const CreateListing = () => {
                       </p>
                     </div>
                     <input
+                    onChange={(e)=>setFiles(e.target.files)}
                       id="image"
                       type="file"
                       accept="image/*"
@@ -298,8 +247,20 @@ const CreateListing = () => {
                       className="hidden"
                     />
                   </label>
-                  <button className=" w-full p-3 bg-transparent border-2 border-green-500 hover:bg-green-500 hover:opacity-70 text-white text-xl font-semibold rounded-lg">
-                    UPLOAD
+                  <p className="text-sm text-red-400">{imageUploadError&& imageUploadError}</p>
+                  <div className="flex items-center justify-center flex-wrap gap-3">
+                  {
+                    formData.imageUrls.length>0 && formData.imageUrls.map((url,index)=>(
+                      
+                      <div className="relative" key={url}>
+                      <img src={url}  alt="image" className="w-[80px] h-[80px] object-cover rounded-lg" />
+                      <button type="button" onClick={()=>handleDeleteImage(index)} className="relative bg-rose-500 text-white p-[2px] rounded-full -top-[85px] -right-[65px] drop-shadow-xl shadow-white flex items-center justify-center hover:bg-rose-600 "><MdDeleteForever /></button>
+                      </div>
+                    ))
+                  }
+                  </div>
+                  <button disabled={loading} type="button" onClick={handleSubmit} className=" w-full p-3 bg-transparent border-2 border-green-500 hover:bg-green-500 hover:opacity-70 text-white text-xl font-semibold rounded-lg">
+                    {loading ? 'UPLOADING..' : 'UPLOAD'}
                   </button>
                 </div>
               </div>
