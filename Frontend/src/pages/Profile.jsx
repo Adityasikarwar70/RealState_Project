@@ -150,6 +150,23 @@ function Profile() {
     }
   };
 
+  const handleDeleteListing = async(listingId)=>{
+    try {
+      const res = await fetch(`/api/listing/delete/${listingId}`,{
+        method:"DELETE",
+      })
+      const data = await res.json();
+      if(data.success === false){
+        console.log(data.message);
+        return
+      }
+
+      setshowListings((prev)=> prev.filter((listing)=> listing._id !== listingId));
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return (
     <section className="w-full h-screen p-5 md:p-20 flex md:flex-row flex-col items-center ">
       <div className="md:h-full md:w-1/2 h-1/3 mt-10 md:py-10 py-20 flex flex-col items-center md:justify-center">
@@ -324,14 +341,15 @@ function Profile() {
           id="Update"
           className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  z-20 w-[350px] md:w-[70vw] h-[650px] md:h-[80vh]  bg-[#00544f] shadow-xl overflow-auto"
         >
-          <h1 className=" text-center text-2xl font-semibold text-white pt-4">Your Listings </h1>
+          <h1 className=" text-center text-2xl font-semibold text-white pt-4">Your Listings</h1>
+          <p className="absolute top-6 left-6 text-wrap text-sm font-semibold text-gray-300 uppercase ">Total Listings : {showListings.length}  </p>
           <div
             className=" absolute top-5 right-10 cursor-pointer "
             onClick={handleListing}
           >
                         <ImCross className=" text-white hover:text-rose-500" />
           </div>
-          <div className="h-full w-full px-10 py-2  flex flex-wrap gap-3 justify-around ">
+          <div className=" w-full px-10 py-2  flex flex-wrap gap-3 justify-around ">
             {showListings &&
               showListings.length > 0 &&
               showListings.map((listing) => (
@@ -350,8 +368,8 @@ function Profile() {
                       </h3>
                     </Link>
                   <div className="flex gap-5 mt-4 px-4 justify-end">
-                    <button className="flex items-center gap-1 text-yellow-300 hover:text-yellow-400 hover:underline text-sm font-semibold "><MdEditSquare />Edit</button>
-                    <button className="flex items-center gap-1 text-rose-400 hover:text-rose-500 hover:underline text-sm font-semibold"> <MdDeleteForever /> Delete</button>
+                    <button  className="flex items-center gap-1 text-yellow-300 hover:text-yellow-400 hover:underline text-sm font-semibold "><MdEditSquare />Edit</button>
+                    <button onClick={()=>handleDeleteListing(listing._id)} className="flex items-center gap-1 text-rose-400 hover:text-rose-500 hover:underline text-sm font-semibold"> <MdDeleteForever /> Delete</button>
                   </div>
                   </div>
                 </div>
