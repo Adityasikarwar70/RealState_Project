@@ -43,6 +43,7 @@ function Profile() {
     if (file) {
       handleFileUpload(file);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [file]);
 
   const handleFileUpload = (file) => {
@@ -59,6 +60,7 @@ function Profile() {
         setFilePercentage(Math.round(progress));
       },
       //
+      // eslint-disable-next-line no-unused-vars
       (error) => {
         setFileUploadError(true);
       },
@@ -368,7 +370,9 @@ function Profile() {
                       </h3>
                     </Link>
                   <div className="flex gap-5 mt-4 px-4 justify-end">
+                    <Link to={`updatelisting/${listing._id}`}>
                     <button  className="flex items-center gap-1 text-yellow-300 hover:text-yellow-400 hover:underline text-sm font-semibold "><MdEditSquare />Edit</button>
+                    </Link>
                     <button onClick={()=>handleDeleteListing(listing._id)} className="flex items-center gap-1 text-rose-400 hover:text-rose-500 hover:underline text-sm font-semibold"> <MdDeleteForever /> Delete</button>
                   </div>
                   </div>
