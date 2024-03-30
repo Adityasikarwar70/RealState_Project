@@ -8,10 +8,7 @@ import {
   FaBath,
   FaBed,
   FaChair,
-  FaMapMarkedAlt,
-  FaMapMarkerAlt,
   FaParking,
-  FaShare,
 } from 'react-icons/fa';
 
 // import { useSelector } from 'react-redux';
@@ -89,7 +86,7 @@ const Listing = () => {
                 <p> <span className=" font-bold"> Description  :</span> {listing.description}</p>
             </div>
             <div className=" md:w-1/2 p-5 flex flex-col   gap-4 text-[16px]  font-semibold  ">
-              {listing.offer && (<h1  className=" md:max-w-64 w-52 p-2 text-center text-white bg-[#00544f] rounded-md hover:opacity-80 cursor-pointer"> Discounted Price {listing.discountPrice}</h1>)}
+              {listing.offer && (<h1  className=" md:max-w-64 w-52 p-2 text-center text-white bg-[#00544f] rounded-md hover:opacity-80 cursor-pointer"> Discounted Price {listing.discountPrice} Rs</h1>)}
               
               
               <ul className='text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6'>
