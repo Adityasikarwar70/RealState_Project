@@ -6,12 +6,12 @@ import { MdLocationPin } from "react-icons/md";
 
 const ListingItem = ({listing}) => {
   return (
-    <div className="  h-[360px] w-[250px] bg-[#043f3b] drop-shadow-lg  overflow-hidden">
+    <div className="  h-[360px] w-[300px] md:w-[250px] bg-[#043f3b] drop-shadow-lg  overflow-hidden">
      <Link to={`/listing/${listing._id}`} className="flex flex-col gap-1 ">
-     <div className="w-[250px] h-[200px] overflow-hidden  ">
+     <div className="wfull h-[200px] overflow-hidden  ">
       <img src={listing.imageUrls[0] || "https://cdn.vectorstock.com/i/preview-1x/57/64/creative-real-estate-house-logo-symbol-vector-41955764.jpg"} alt="" className="w-full h-full hover:scale-105 transition-all duration-300 object-cover " />
      </div>
-     <h1 className=" w-[250px] truncate text-white px-2 font-semibold text-lg ">
+     <h1 className=" w-full truncate text-white px-2 font-semibold text-lg ">
       {listing.name}
      </h1>
     

@@ -11,6 +11,7 @@ import CreateListing from './pages/CreateListing'
 import UpdateListing from './pages/UpdateListing'
 import Listing from './pages/Listing'
 import Search from './pages/Search'
+import Footer from './component/Footer'
 
 
 function App() {

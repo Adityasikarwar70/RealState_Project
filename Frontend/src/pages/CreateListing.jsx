@@ -422,6 +422,7 @@ const CreateListing = () => {
           </div>
         </form>
       </div>
+      
     </section>
   );
 };

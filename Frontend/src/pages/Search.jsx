@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import loadingGif from "/assets/loading.gif";
 import ListingItem from "../component/ListingItem";
+import { MdExpandMore } from "react-icons/md";
 
 const Search = () => {
     const navigate = useNavigate()
@@ -103,6 +104,21 @@ const Search = () => {
   };
 //   console.log(sidebarData);
 
+const showMoreClick = async()=>{
+  const numberOfListings = listings.length;
+  const startIndex = numberOfListings;
+  const urlParams = new URLSearchParams(location.search);
+  urlParams.set('startIndex', startIndex);
+  const searchQuery = urlParams.toString();
+  const res = await fetch(`/api/listing/get?${searchQuery}`);
+  const data = await res.json();
+  if (data.length < 9) {
+    setShowMore(false);
+  }
+  setListings([...listings, ...data]);
+}
+
+
 const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams();
@@ -201,10 +217,10 @@ const handleSubmit = (e) => {
           </button>
         </form>
       </div>
-      <div className="  md:h-full border-t-[1px]  md:border-l-[1px] border-opacity-5 md:border-t-0 p-5 flex flex-col md:items-start gap-5
+      <div className="  md:h-full border-t-[1px]  md:border-l-[1px] border-opacity-5 md:border-t-0 p-5 flex flex-col md:items-center gap-5
        ">
         <h1 className=" text-center text-3xl font-bold text-white">
-          Listing Results
+          Listing Results ({listings.length})
         </h1>
         <div className=" flex items-center  justify-center">
           {!loading && listings.length === 0 && (
@@ -223,8 +239,14 @@ const handleSubmit = (e) => {
             <ListingItem key={listing._id} listing={listing}/>
           ))}
           </div>
+          {showMore && (
+            <button onClick={showMoreClick} className="text-sm font-semibold bg-blue-300 p-2 rounded-lg flex gap-2 items-center"> Show More <MdExpandMore className="text-lg font-bold" />
+            </button>
+          )}
       </div>
+      
     </div>
+
   );
 };
 
